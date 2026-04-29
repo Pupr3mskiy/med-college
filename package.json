@@ -1,0 +1,24 @@
+{
+  "name": "med-college",
+  "version": "1.0.0",
+  "description": "Тема проекта:\r Информационная система медицинского колледжа при клинической больнице",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pupr3mskiy/med-college.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Pupr3mskiy/med-college/issues"
+  },
+  "homepage": "https://github.com/Pupr3mskiy/med-college#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
