@@ -1,13 +1,64 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const router = express.Router();
 
-app.use(express.json());
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok' });
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+const users = [];
+
+// REGISTER
+router.post('/register', async (req, res) => {
+
+    const { email, password } = req.body;
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = {
+        email,
+        password: hashedPassword
+    };
+
+    users.push(user);
+
+    res.json({
+        message: 'User registered',
+        users
+    });
 });
 
-app.get('/', (req, res) => res.send('Hello World!'))
+// LOGIN
+router.post('/login', async (req, res) => {
 
+    const { email, password } = req.body;
 
+    const user = users.find(u => u.email === email);
 
-app.listen(3000, () => console.log('Server running'))
+    if (!user) {
+        return res.status(404).json({
+            message: 'User not found'
+        });
+    }
+
+    const isPasswordCorrect = await bcrypt.compare(
+        password,
+        user.password
+    );
+
+    if (!isPasswordCorrect) {
+        return res.status(401).json({
+            message: 'Wrong password'
+        });
+    }
+
+    const token = jwt.sign(
+        { email: user.email },
+        'SECRET_KEY'
+    );
+
+    res.json({
+        message: 'Login success',
+        token
+    });
+});
+
+module.exports = router;
