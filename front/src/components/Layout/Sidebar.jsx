@@ -10,12 +10,27 @@ export default function Sidebar() {
   };
 
   return (
-    <aside style={{ width: '200px', background: '#f4f4f4', padding: '1rem', minHeight: '100vh' }}>
-      <nav>
-        <ul style={{ listStyle: 'none', padding: 0 }}>
-          <li><Link to="/dashboard">📊 Дашборд</Link></li>
-          <li><Link to="/about">ℹ️ О проекте</Link></li>
-          <li><button onClick={handleLogout}>🚪 Выйти</button></li>
+    <aside className="sidebar">
+      <nav className="sidebar-nav">
+        <ul>
+          <li>
+            <Link to="/dashboard" className="sidebar-link">
+              <span className="link-icon">📊</span>
+              <span>Дашборд</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/about" className="sidebar-link">
+              <span className="link-icon">ℹ️</span>
+              <span>О проекте</span>
+            </Link>
+          </li>
+          <li>
+            <button onClick={handleLogout} className="sidebar-link logout-btn">
+              <span className="link-icon">🚪</span>
+              <span>Выйти</span>
+            </button>
+          </li>
         </ul>
       </nav>
     </aside>

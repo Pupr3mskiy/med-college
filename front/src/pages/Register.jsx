@@ -112,7 +112,7 @@ export default function Register() {
     return (
       <div className="auth-container">
         <div className="auth-card success">
-          <h2>✅ Регистрация успешна!</h2>
+          <h2>Регистрация успешна!</h2>
           <p>Перенаправление...</p>
         </div>
       </div>
@@ -122,7 +122,7 @@ export default function Register() {
   return (
     <div className="auth-container">
       <div className="auth-card">
-        <h1>📋 Регистрация</h1>
+        <h1>Регистрация</h1>
         <p className="subtitle">Создайте аккаунт для доступа к системе</p>
 
         {error && (

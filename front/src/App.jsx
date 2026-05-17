@@ -1,4 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import Header from './components/Layout/Header';
+import Sidebar from './components/Layout/Sidebar';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
@@ -11,31 +13,49 @@ import { isAuthenticated } from './utils/auth';
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/about" element={<About />} />
+      <div className="app-wrapper">
+    
+        <Header />
         
-        <Route path="/dashboard" element={
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        } />
-        
-        <Route path="/:username" element={
-          <ProtectedRoute>
-            <Profile />
-          </ProtectedRoute>
-        } />
-        
-        <Route path="/" element={
-          isAuthenticated() 
-            ? <Navigate to="/dashboard" /> 
-            : <Navigate to="/login" />
-        } />
-        
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+        <main className="main-body">
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            
+            <Route path="/about" element={<About />} />
+          
+            <Route path="/dashboard" element={
+              <ProtectedRoute>
+                <div className="page-layout">
+                  <Sidebar />
+                  <div className="content-area">
+                    <Dashboard />
+                  </div>
+                </div>
+              </ProtectedRoute>
+            } />
+            
+            <Route path="/:username" element={
+              <ProtectedRoute>
+                <div className="page-layout">
+                  <Sidebar />
+                  <div className="content-area">
+                    <Profile />
+                  </div>
+                </div>
+              </ProtectedRoute>
+            } />
+            
+            <Route path="/" element={
+              isAuthenticated() 
+                ? <Navigate to="/dashboard" /> 
+                : <Navigate to="/login" />
+            } />
+            
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+      </div>
     </BrowserRouter>
   );
 }
