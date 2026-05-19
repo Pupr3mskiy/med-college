@@ -7,23 +7,41 @@ const jwt = require('jsonwebtoken');
 const users = [];
 
 // REGISTER
+
+
+
 router.post('/register', async (req, res) => {
-    
-    console.log(req.body);
-    const { email, password } = req.body;
+    ///ПРОВЕРКА НА ПОПАДЕНИЕ ФРОНТА
+    console.log('REGISTER HIT');
+    console.log('🔥 NEW REGISTER REQUEST');
+    console.log('BODY:', req.body);
+
+    const { user_name, email, password } = req.body;
+
+    console.log('PARSED DATA:', {
+        user_name,
+        email,
+        password
+    });
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = {
+        user_name,
         email,
         password: hashedPassword
     };
 
     users.push(user);
 
+    console.log('USERS ARRAY:', users);
+
     res.json({
         message: 'User registered',
-        users
+        user: {
+            user_name,
+            email
+        }
     });
 });
 
@@ -53,12 +71,17 @@ router.post('/login', async (req, res) => {
 
     const token = jwt.sign(
         { email: user.email },
-        'SECRET_KEY'
+        'SECRET_KEY',
+        { expiresIn: '1h' }
     );
 
     res.json({
         message: 'Login success',
-        token
+        token,
+        user: {
+            user_name: user.user_name,
+            email: user.email
+        }
     });
 });
 
