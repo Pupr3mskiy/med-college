@@ -13,7 +13,7 @@ const users = [];
 router.post('/register', async (req, res) => {
     ///ПРОВЕРКА НА ПОПАДЕНИЕ ФРОНТА
     console.log('REGISTER HIT');
-    console.log('🔥 NEW REGISTER REQUEST');
+    console.log('NEW REGISTER REQUEST');
     console.log('BODY:', req.body);
 
     const { user_name, email, password } = req.body;
