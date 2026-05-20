@@ -14,7 +14,7 @@ app.use(express.json());
 const usersRoutes = require('./routes/users');
 const authRoutes = require('./routes/auth.routes');
 
-// 🔥 ВАЖНО: добавляем /api
+
 app.use('/api/users', usersRoutes);
 app.use('/api/auth', authRoutes);
 
