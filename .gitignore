@@ -427,3 +427,20 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+# Node.js / React
+node_modules/
+.env
+.env.local
+.env.production
+*.log
+dist/
+build/
+coverage/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

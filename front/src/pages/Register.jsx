@@ -10,12 +10,10 @@ export default function Register() {
     password: '',
     confirmPassword: ''
   });
-
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
-
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -110,120 +108,158 @@ export default function Register() {
 
   if (success) {
     return (
-      <div className="auth-container">
-        <div className="auth-card success">
-          <h2>Регистрация успешна!</h2>
-          <p>Перенаправление...</p>
+      <div className="split-screen">
+        <div className="split-left">
+          <div className="split-content">
+            <div className="welcome-block">
+              <h1>Регистрация успешна! 🎉</h1>
+              <p>Добро пожаловать в медицинский колледж</p>
+              <p className="redirect-text">Перенаправление...</p>
+            </div>
+          </div>
+        </div>
+        <div className="split-right">
+          <div className="success-message">
+            <div className="success-icon">✅</div>
+            <h2>Аккаунт создан!</h2>
+            <p>Теперь вы можете войти в систему</p>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="auth-container">
-      <div className="auth-card">
-        <h1>Регистрация</h1>
-        <p className="subtitle">Создайте аккаунт для доступа к системе</p>
-
-        {error && (
-          <div className="error-message">
-            ⚠️ {error}
-            <button onClick={() => setError('')} className="close-error">×</button>
+    <div className="split-screen">
+      {/* Левая часть - изображение и приветствие */}
+      <div className="split-left">
+        <div className="split-content">
+          <div className="welcome-block">
+            <h1>Присоединяйтесь к нам!</h1>
+            <p>Создайте аккаунт для получения доступа ко всем возможностям системы медицинского колледжа</p>
           </div>
-        )}
+        </div>
+      </div>
 
-        <form onSubmit={handleSubmit} noValidate>
-          <div className="form-group">
-            <label htmlFor="user_name">Имя пользователя *</label>
-            <input
-              type="text"
-              id="user_name"
-              name="user_name"
-              value={formData.user_name}
-              onChange={handleChange}
-              placeholder="Введите имя пользователя"
-              className={validationErrors.user_name ? 'error' : ''}
+      {/* Правая часть - форма регистрации */}
+      <div className="split-right">
+        <div className="auth-card">
+          <div className="auth-header">
+            <h2>Регистрация</h2>
+            <p>Заполните форму для создания аккаунта</p>
+          </div>
+
+          {error && <div className="error-message">⚠️ {error}</div>}
+
+          <form onSubmit={handleSubmit} className="auth-form" noValidate>
+            <div className="form-group">
+              <label htmlFor="user_name" className="form-label">
+                Имя пользователя
+                <span className="required">*</span>
+              </label>
+              <input
+                type="text"
+                id="user_name"
+                name="user_name"
+                value={formData.user_name}
+                onChange={handleChange}
+                placeholder="Придумайте логин"
+                className={`form-input ${validationErrors.user_name ? 'input-error' : ''}`}
+                disabled={loading}
+                autoComplete="username"
+              />
+              {validationErrors.user_name && (
+                <span className="field-error">{validationErrors.user_name}</span>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="email" className="form-label">
+                Email
+                <span className="required">*</span>
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="example@mail.com"
+                className={`form-input ${validationErrors.email ? 'input-error' : ''}`}
+                disabled={loading}
+                autoComplete="email"
+              />
+              {validationErrors.email && (
+                <span className="field-error">{validationErrors.email}</span>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="password" className="form-label">
+                Пароль
+                <span className="required">*</span>
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Минимум 6 символов"
+                className={`form-input ${validationErrors.password ? 'input-error' : ''}`}
+                disabled={loading}
+                autoComplete="new-password"
+              />
+              {validationErrors.password && (
+                <span className="field-error">{validationErrors.password}</span>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="confirmPassword" className="form-label">
+                Подтвердите пароль
+                <span className="required">*</span>
+              </label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                placeholder="Повторите пароль"
+                className={`form-input ${validationErrors.confirmPassword ? 'input-error' : ''}`}
+                disabled={loading}
+                autoComplete="new-password"
+              />
+              {validationErrors.confirmPassword && (
+                <span className="field-error">{validationErrors.confirmPassword}</span>
+              )}
+            </div>
+
+            <button 
+              type="submit" 
+              className="btn-submit"
               disabled={loading}
-            />
-            {validationErrors.user_name && (
-              <span className="field-error">{validationErrors.user_name}</span>
-            )}
+            >
+              {loading ? (
+                <>
+                  <span className="spinner"></span>
+                  Регистрация...
+                </>
+              ) : (
+                'Зарегистрироваться'
+              )}
+            </button>
+          </form>
+
+          <div className="auth-footer">
+            <p>
+              Уже есть аккаунт?{' '}
+              <Link to="/login" className="auth-link">
+                Войти
+              </Link>
+            </p>
           </div>
-
-          <div className="form-group">
-            <label htmlFor="email">Email *</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="example@mail.com"
-              className={validationErrors.email ? 'error' : ''}
-              disabled={loading}
-            />
-            {validationErrors.email && (
-              <span className="field-error">{validationErrors.email}</span>
-            )}
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="password">Пароль *</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Минимум 6 символов"
-              className={validationErrors.password ? 'error' : ''}
-              disabled={loading}
-            />
-            {validationErrors.password && (
-              <span className="field-error">{validationErrors.password}</span>
-            )}
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="confirmPassword">Подтвердите пароль *</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              placeholder="Повторите пароль"
-              className={validationErrors.confirmPassword ? 'error' : ''}
-              disabled={loading}
-            />
-            {validationErrors.confirmPassword && (
-              <span className="field-error">{validationErrors.confirmPassword}</span>
-            )}
-          </div>
-
-          <button 
-            type="submit" 
-            className="btn btn-primary btn-block"
-            disabled={loading}
-          >
-            {loading ? (
-              <>
-                <span className="spinner"></span>
-                Регистрация...
-              </>
-            ) : (
-              'Зарегистрироваться'
-            )}
-          </button>
-        </form>
-
-        <div className="auth-footer">
-          <p>
-            Уже есть аккаунт?{' '}
-            <Link to="/login" className="link">
-              Войти
-            </Link>
-          </p>
         </div>
       </div>
     </div>
