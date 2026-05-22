@@ -14,7 +14,7 @@ import { useEffect } from 'react';
 function App() {
 
   useEffect(() => {
-    fetch('http://localhost:3000/test')
+    fetch('http://localhost:3000/api/test')
       .then(res => res.json())
       .then(data => console.log(data));
   }, []);
