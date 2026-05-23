@@ -11,19 +11,16 @@ app.use(cors({
 app.use(express.json());
 
 // routes
-const usersRoutes = require('./routes/users');
+const usersRoutes = require('./routes/users.routes');
 const authRoutes = require('./routes/auth.routes');
 
-// 🔥 ВАЖНО: добавляем /api
+// api
 app.use('/api/users', usersRoutes);
 app.use('/api/auth', authRoutes);
 
-// test route
-app.get('/api/test', (req, res) => {
-  res.json({ message: 'Backend работает!' });
-});
 
-// start server
+
+// старт
 app.listen(3000, () => {
   console.log('Сервер запущен на http://localhost:3000');
 });
