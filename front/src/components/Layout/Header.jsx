@@ -1,6 +1,5 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { isAuthenticated, logout } from '../../utils/auth';
-import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -14,19 +13,21 @@ export default function Header() {
   return (
     <header className="main-header">
       <div className="header-container">
-        {/* Левая часть: Логотип + Название */}
+        {/* Левая часть: Логотип + Название (Кликабельно) */}
         <div className="header-left">
           <div className="logo-placeholder"></div>
           <div className="college-info">
-            <h1>Медицинский Колледж</h1>
+            <Link to="/" className="header-title-link">
+              <h1>Медицинский Колледж</h1>
+            </Link>
           </div>
         </div>
 
         {/* Правая часть: Подзаголовок + Навигация */}
         <div className="header-right">
           <div className="header-top">
-            <span className="college-subtitle">Информационная система управления</span>
           </div>
+          
           <div className="header-nav">
             <Link to="/about" className="header-link">О проекте</Link>
             
