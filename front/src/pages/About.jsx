@@ -96,8 +96,8 @@ export default function About() {
         <div className="about-card">
           <h2> Контакты</h2>
           <div className="contact-info">
-            <p><strong>Адрес:</strong> г. Примерный, ул. Медицинская, 1</p>
-            <p><strong>Телефон:</strong> +7 (XXX) XXX-XX-XX</p>
+            <p><strong>Адрес:</strong> г. Москва, ул. Варшавская, 28</p>
+            <p><strong>Телефон:</strong> +7 (923) 531-34-22</p>
             <p><strong>Email:</strong> info@med-college.ru</p>
             <p><strong>Режим работы:</strong> Пн-Пт: 8:00 - 17:00</p>
           </div>

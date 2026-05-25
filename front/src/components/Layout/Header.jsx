@@ -13,9 +13,7 @@ export default function Header() {
   return (
     <header className="main-header">
       <div className="header-container">
-        {/* Левая часть: Логотип + Название (Кликабельно) */}
         <div className="header-left">
-          <div className="logo-placeholder"></div>
           <div className="college-info">
             <Link to="/" className="header-title-link">
               <h1>Медицинский Колледж</h1>
@@ -23,7 +21,6 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Правая часть: Подзаголовок + Навигация */}
         <div className="header-right">
           <div className="header-top">
           </div>

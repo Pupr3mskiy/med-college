@@ -15,19 +15,19 @@ export default function Sidebar() {
         <ul>
           <li>
             <Link to="/dashboard" className="sidebar-link">
-              <span className="link-icon">📊</span>
+              <span className="link-icon"></span>
               <span>Дашборд</span>
             </Link>
           </li>
           <li>
             <Link to="/about" className="sidebar-link">
-              <span className="link-icon">ℹ️</span>
+              <span className="link-icon"></span>
               <span>О проекте</span>
             </Link>
           </li>
           <li>
             <button onClick={handleLogout} className="sidebar-link logout-btn">
-              <span className="link-icon">🚪</span>
+              <span className="link-icon"></span>
               <span>Выйти</span>
             </button>
           </li>
