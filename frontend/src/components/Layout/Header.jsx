@@ -1,7 +1,5 @@
-// front/src/components/Layout/Header.jsx
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { isAuthenticated, logout } from '../../utils/auth';
-import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -17,23 +15,29 @@ export default function Header() {
       <div className="header-container">
         <div className="header-left">
           <div className="college-info">
-            <h1>Медицинский Колледж</h1>
-            <span className="college-subtitle">Информационная система управления</span>
+            <Link to="/" className="header-title-link">
+              <h1>Медицинский Колледж</h1>
+            </Link>
           </div>
         </div>
 
         <div className="header-right">
-          <Link to="/about" className="header-link">О проекте</Link>
+          <div className="header-top">
+          </div>
           
-          {isLoggedIn ? (
-            <button onClick={handleLogout} className="header-btn logout-btn">
-               Выйти
-            </button>
-          ) : (
-            <Link to="/login" className="header-btn login-btn">
-               Войти
-            </Link>
-          )}
+          <div className="header-nav">
+            <Link to="/about" className="header-link">О проекте</Link>
+            
+            {isLoggedIn ? (
+              <button onClick={handleLogout} className="header-btn logout-btn">
+                 Выйти
+              </button>
+            ) : (
+              <Link to="/login" className="header-btn login-btn">
+                 Войти
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </header>
