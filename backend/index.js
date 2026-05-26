@@ -1,15 +1,18 @@
 const express = require('express');
 const cors = require('cors');
-const authMiddleware = require('./middlewares/isAuth');
-const attachCurrentUser = require('./middlewares/attachCurrentUser');
 
 const app = express();
+
+app.use(cors({
+    origin: 'http://localhost:5173'
+}));
+
+app.use(express.json());
 
 // DATABASE
 const pool = require('./database/db');
 
-// проверка подключения
-pool.query('SELECT NOW()', (err, res) => {
+pool.query('SELECT NOW()', (err) => {
 
     if (err) {
         console.log(err);
@@ -20,23 +23,19 @@ pool.query('SELECT NOW()', (err, res) => {
 
 });
 
-// middleware
-app.use(cors({
-    origin: 'http://localhost:5173'
-}));
-
-app.use(express.json());
-
-// routes
-const usersRoutes = require('./routes/users.routes');
+// ROUTES
 const authRoutes = require('./routes/auth.routes');
-const analyticsRoutes = require('./routes/analytics.routes');
+const usersRoutes = require('./routes/users.routes');
 
-// api
-app.use('/api/users', usersRoutes);
+// API
 app.use('/api/auth', authRoutes);
-app.use('/api/analytics', analyticsRoutes);
-// start
+app.use('/api/users', usersRoutes);
+
+// SUPPORT ROUTES
+app.use('/api/analytics', require('./routes/analytics.routes'));
+
+
+// START
 app.listen(3000, () => {
     console.log('Сервер запущен на http://localhost:3000');
 });

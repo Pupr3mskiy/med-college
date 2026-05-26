@@ -2,8 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../database/db');
 
-// временно массив (потом заменим на PostgreSQL)
-const { users } = require('../services/auth.service');
+
 
 // GET USERS
 router.get('/', async (req, res) => {
@@ -28,7 +27,7 @@ router.get('/', async (req, res) => {
             [`%${search}%`, limit, offset]
         );
 
-        // 📊 общее количество
+        // общее количество
         const countResult = await pool.query(
             `
             SELECT COUNT(*) FROM users

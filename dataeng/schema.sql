@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS users;
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
 
-    username VARCHAR(100) NOT NULL UNIQUE,
+    user_name VARCHAR(100) NOT NULL UNIQUE,
     full_name VARCHAR(150) NOT NULL,
 
     email VARCHAR(100) NOT NULL UNIQUE,
@@ -76,7 +76,7 @@ CREATE TABLE medical_practice (
 );
 
 
-INSERT INTO users (username, full_name, email, password_hash, role)
+INSERT INTO users (user_name, full_name, email, password_hash, role)
 VALUES
 ('admin', 'Admin User', 'admin@mail.ru', 'hash', 'admin');
 

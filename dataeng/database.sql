@@ -12,7 +12,7 @@ CREATE TABLE hospital_departments (
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
 
-    username VARCHAR(100) NOT NULL UNIQUE,
+    user_name VARCHAR(100) NOT NULL UNIQUE,
     full_name VARCHAR(150) NOT NULL,
 
     email VARCHAR(100) NOT NULL UNIQUE,

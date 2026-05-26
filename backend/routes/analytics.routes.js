@@ -61,14 +61,14 @@ router.get('/dashboard', async (req, res) => {
     };
 
     res.json({
-      totalUsers,
-      students,
-      teachers,
-      admins,
-      studentsByDept,
-      enrollmentTrend,
-      staffDistribution
-    });
+        totalUsers: totalUsers || 0,
+        students: students || 0,
+        teachers: teachers || 0,
+        admins: admins || 0,
+        studentsByDept,
+        enrollmentTrend,
+        staffDistribution
+});
 
   } catch (err) {
     console.error(err);
