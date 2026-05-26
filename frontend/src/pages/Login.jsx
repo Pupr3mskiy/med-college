@@ -5,7 +5,7 @@ import { setAuth } from '../utils/auth';
 
 export default function Login() {
   const [formData, setFormData] = useState({
-    user_name: '',
+    email: '',
     password: ''
   });
   const [loading, setLoading] = useState(false);
@@ -81,16 +81,12 @@ export default function Login() {
                 <span className="required">*</span>
               </label>
               <input
-                type="text"
-                id="user_name"
-                name="user_name"
-                value={formData.user_name}
-                onChange={handleChange}
-                placeholder="Введите логин"
-                className="form-input"
-                disabled={loading}
-                autoComplete="username"
-              />
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Введите email"
+            />
             </div>
 
             <div className="form-group">

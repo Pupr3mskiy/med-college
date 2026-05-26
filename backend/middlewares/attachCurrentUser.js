@@ -1,10 +1,15 @@
-const { users } = require('../services/auth.service');
+const pool = require('../database/db');
 
-const attachCurrentUser = (req, res, next) => {
+const attachCurrentUser = async (req, res, next) => {
     try {
         const currentUserEmail = req.token.email;
 
-        const user = users.find(u => u.email === currentUserEmail);
+        const result = await pool.query(
+            `SELECT user_id, user_name, email, role FROM users WHERE email = $1`,
+            [currentUserEmail]
+        );
+
+        const user = result.rows[0];
 
         if (!user) {
             return res.status(401).json({ message: 'User not found' });

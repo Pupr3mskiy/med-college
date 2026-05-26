@@ -1,11 +1,28 @@
 const express = require('express');
 const cors = require('cors');
+const authMiddleware = require('./middlewares/isAuth');
+const attachCurrentUser = require('./middlewares/attachCurrentUser');
 
 const app = express();
 
+// DATABASE
+const pool = require('./database/db');
+
+// проверка подключения
+pool.query('SELECT NOW()', (err, res) => {
+
+    if (err) {
+        console.log(err);
+
+    } else {
+        console.log('PostgreSQL connected');
+    }
+
+});
+
 // middleware
 app.use(cors({
-  origin: 'http://localhost:5173'
+    origin: 'http://localhost:5173'
 }));
 
 app.use(express.json());
@@ -18,9 +35,7 @@ const authRoutes = require('./routes/auth.routes');
 app.use('/api/users', usersRoutes);
 app.use('/api/auth', authRoutes);
 
-
-
-// старт
+// start
 app.listen(3000, () => {
-  console.log('Сервер запущен на http://localhost:3000');
+    console.log('Сервер запущен на http://localhost:3000');
 });
