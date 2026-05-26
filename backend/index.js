@@ -30,11 +30,12 @@ app.use(express.json());
 // routes
 const usersRoutes = require('./routes/users.routes');
 const authRoutes = require('./routes/auth.routes');
+const analyticsRoutes = require('./routes/analytics.routes');
 
 // api
 app.use('/api/users', usersRoutes);
 app.use('/api/auth', authRoutes);
-
+app.use('/api/analytics', analyticsRoutes);
 // start
 app.listen(3000, () => {
     console.log('Сервер запущен на http://localhost:3000');

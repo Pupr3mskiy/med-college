@@ -19,7 +19,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.user_name.trim() || !formData.password) {
+    if  (!formData.email.trim() || !formData.password) {
       setError('Заполните все поля');
       return;
     }
@@ -29,7 +29,7 @@ export default function Login() {
 
     try {
       const response = await api.post('/auth/login', {
-        user_name: formData.user_name,
+        email: formData.email,
         password: formData.password
       });
 
