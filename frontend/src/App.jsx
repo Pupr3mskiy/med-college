@@ -1,37 +1,29 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Layout/Header';
 import Sidebar from './components/Layout/Sidebar';
+import Home from './pages/Home';
+import About from './pages/About';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
-import About from './pages/About';
-import NotFound from './pages/NotFound';
 import ProtectedRoute from './components/ProtectedRoute';
 import { isAuthenticated } from './utils/auth';
-import { useEffect } from 'react';
 
 function App() {
-
-  useEffect(() => {
-    fetch('http://localhost:3000/api/test')
-      .then(res => res.json())
-      .then(data => console.log(data));
-  }, []);
-
   return (
     <BrowserRouter>
       <div className="app-wrapper">
-
         <Header />
-
+        
         <main className="main-body">
           <Routes>
+            <Route path="/" element={<Home />} />
+            
+            <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-
-            <Route path="/about" element={<About />} />
-
+            
             <Route path="/dashboard" element={
               <ProtectedRoute>
                 <div className="page-layout">
@@ -42,7 +34,7 @@ function App() {
                 </div>
               </ProtectedRoute>
             } />
-
+            
             <Route path="/:username" element={
               <ProtectedRoute>
                 <div className="page-layout">
@@ -53,17 +45,11 @@ function App() {
                 </div>
               </ProtectedRoute>
             } />
-
-            <Route path="/" element={
-              isAuthenticated()
-                ? <Navigate to="/dashboard" />
-                : <Navigate to="/login" />
-            } />
-
-            <Route path="*" element={<NotFound />} />
+            
+            {/* 404 - перенаправление на главную */}
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
-
       </div>
     </BrowserRouter>
   );

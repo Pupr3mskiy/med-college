@@ -53,47 +53,92 @@ export default function Login() {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-card">
-        <h1>Вход в систему</h1>
-        <p className="subtitle">Введите данные для доступа к личному кабинету</p>
+    <div className="split-screen">
+      {/* Левая часть - изображение и приветствие */}
+      <div className="split-left">
+        <div className="split-content">
+          <div className="welcome-block">
+            <h1>Добро пожаловать!</h1>
+            <p>Войдите в систему для доступа к личному кабинету студента медицинского колледжа</p>
+          </div>
+        </div>
+      </div>
 
-        {error && <div className="error-message">⚠️ {error}</div>}
-
-        <form onSubmit={handleSubmit} noValidate>
-          <div className="form-group">
-            <label htmlFor="user_name">Имя пользователя *</label>
-            <input
-              type="text"
-              id="user_name"
-              name="user_name"
-              value={formData.user_name}
-              onChange={handleChange}
-              placeholder="Введите логин"
-              disabled={loading}
-            />
+      {/* Правая часть - форма входа */}
+      <div className="split-right">
+        <div className="auth-card">
+          <div className="auth-header">
+            <h2>Вход в систему</h2>
+            <p>Введите ваши данные для доступа к системе</p>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="password">Пароль *</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Введите пароль"
+          {error && <div className="error-message">⚠️ {error}</div>}
+
+          <form onSubmit={handleSubmit} className="auth-form" noValidate>
+            <div className="form-group">
+              <label htmlFor="user_name" className="form-label">
+                Имя пользователя
+                <span className="required">*</span>
+              </label>
+              <input
+                type="text"
+                id="user_name"
+                name="user_name"
+                value={formData.user_name}
+                onChange={handleChange}
+                placeholder="Введите логин"
+                className="form-input"
+                disabled={loading}
+                autoComplete="username"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="password" className="form-label">
+                Пароль
+                <span className="required">*</span>
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Введите пароль"
+                className="form-input"
+                disabled={loading}
+                autoComplete="current-password"
+              />
+            </div>
+
+            <div className="form-options">
+              <label className="checkbox-label">
+                <input type="checkbox" className="checkbox" />
+                <span>Запомнить меня</span>
+              </label>
+            </div>
+
+            <button 
+              type="submit" 
+              className="btn-submit"
               disabled={loading}
-            />
+            >
+              {loading ? (
+                <span className="spinner"></span>
+              ) : (
+                'Войти'
+              )}
+            </button>
+          </form>
+
+          <div className="auth-footer">
+            <p>
+              Нет аккаунта?{' '}
+              <Link to="/register" className="auth-link">
+                Зарегистрироваться
+              </Link>
+            </p>
           </div>
-
-          <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
-            {loading ? 'Вход...' : 'Войти'}
-          </button>
-        </form>
-
-        <div className="auth-footer">
-          <p>Нет аккаунта? <Link to="/register" className="link">Зарегистрироваться</Link></p>
         </div>
       </div>
     </div>
