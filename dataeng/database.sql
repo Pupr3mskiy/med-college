@@ -9,17 +9,45 @@ CREATE TABLE hospital_departments (
     department_id SERIAL PRIMARY KEY,
     department_name VARCHAR(100) NOT NULL
 );
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
 
+    username VARCHAR(100) NOT NULL UNIQUE,
+    full_name VARCHAR(150) NOT NULL,
+
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,
+
+    role VARCHAR(20) NOT NULL CHECK (role IN ('student', 'teacher', 'admin')),
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 CREATE TABLE students (
     student_id SERIAL PRIMARY KEY,
-    full_name VARCHAR(100) NOT NULL,
-    group_name VARCHAR(50)
+
+    user_id INTEGER UNIQUE NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+
+    group_name VARCHAR(10) CHECK (
+        group_name IN ('МК-1','МК-2','МК-3','МК-4','МК-5','МК-6','МК-7')
+    )
 );
 
 CREATE TABLE teachers (
     teacher_id SERIAL PRIMARY KEY,
-    full_name VARCHAR(100) NOT NULL,
-    subject VARCHAR(100)
+
+    user_id INTEGER UNIQUE NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+
+    subject VARCHAR(50) CHECK (
+        subject IN (
+            'биология',
+            'патология',
+            'фармакология',
+            'основы латинского языка',
+            'анатомия',
+            'практика',
+            'врачевание'
+        )
+    )
 );
 
 CREATE TABLE medical_practice (

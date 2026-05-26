@@ -30,7 +30,11 @@ ChartJS.register(
 );
 
 export default function Dashboard() {
-  const [stats, setStats] = useState(null);
+  const [stats, setStats] = useState({
+  studentsByDept: { categories: [], data: [] },
+  enrollmentTrend: { months: [], data: [] },
+  staffDistribution: []
+});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
