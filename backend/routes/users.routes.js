@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
             LIMIT $2 OFFSET $3
             `,
             [`%${search}%`, limit, offset]
-        );
+        );/// УБРАТЬ НАХУЙ ЗАПРОСЫ
 
         // общее количество
         const countResult = await pool.query(
