@@ -6,6 +6,7 @@
   "scripts": {
     "frontend": "cd frontend && npm run dev",
     "backend": "cd backend && node index.js",
-    "dev": "concurrently \"npm run backend\" \"npm run frontend\""
+    "support": "cd support-service && venv\\Scripts\\python.exe -m uvicorn main:app --reload --port 8000",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\" \"npm run support\""
   }
 }

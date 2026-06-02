@@ -1,8 +1,20 @@
 from fastapi import FastAPI
 import hashlib
 import json
+import json
 
 app = FastAPI()
+
+@app.get("/about")
+def about():
+    return {
+        "project": "Medical College",
+        "description": "Система управления медицинским колледжем",
+        "version": "1.0",
+        "core_service": "Node.js + Express",
+        "support_service": "FastAPI"
+    }
+
 
 @app.get("/")
 def root():
@@ -32,8 +44,7 @@ def get_hash(text: str):
 @app.get("/about")
 def about():
 
-    return {
-        "project": "Medical College",
-        "version": "1.0",
-        "framework": "FastAPI"
-    }
+    with open("about.json", "r", encoding="utf-8") as file:
+        data = json.load(file)
+
+    return data

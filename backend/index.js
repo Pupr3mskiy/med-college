@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-
+const profileRoutes = require('./routes/profile.routes');
 const app = express();
 
 app.use(cors({
@@ -30,10 +30,11 @@ const usersRoutes = require('./routes/users.routes');
 // API
 app.use('/api/auth', authRoutes);
 app.use('/api/users', usersRoutes);
+app.use('/api/profile', profileRoutes);
 
 // SUPPORT ROUTES
 app.use('/api/analytics', require('./routes/analytics.routes'));
-
+ 
 
 // START
 app.listen(3000, () => {
