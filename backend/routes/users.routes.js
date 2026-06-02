@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
         const offset = (page - 1) * limit;
         const order = sort === 'asc' ? 'ASC' : 'DESC';
 
-        // 🔎 поиск + сортировка + пагинация
+        //  поиск + сортировка + пагинация
         const result = await pool.query(
             `
             SELECT user_id, user_name, email, role, created_at
@@ -44,7 +44,7 @@ router.get('/', async (req, res) => {
         });
 
     } catch (err) {
-    console.error(err); // 👈 ДОБАВЬ ЭТО
+    console.error(err); 
     res.status(500).json({ message: err.message });
 }
 });
